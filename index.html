@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo Shadow DOM</title>
+</head>
+<body>
+
+<h2>Ejemplo Shadow DOM</h2>
+
+<div id="login-component"></div>
+
+<script>
+    // Contenedor del Shadow DOM
+    const host = document.getElementById("login-component");
+
+    // Creamos un Shadow DOM tipo OPEN
+    const shadow = host.attachShadow({ mode: "open" });
+
+    shadow.innerHTML = `
+        <style>
+            input{
+                padding:8px;
+                margin:5px;
+            }
+            button{
+                padding:8px;
+            }
+        </style>
+
+        <input id="txtUsuario" placeholder="Usuario">
+        <button id="btnIngresar">Ingresar</button>
+    `;
+
+    shadow.getElementById("btnIngresar")
+        .addEventListener("click", () => {
+            alert("Bienvenido " +
+                shadow.getElementById("txtUsuario").value);
+        });
+</script>
+
+</body>
+</html>
