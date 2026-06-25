@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Ejemplo Shadow DOM</title>
+    <style>
+        input{
+            padding:8px;
+            margin:5px;
+        }
+        button{
+            padding:8px;
+        }
+    </style>
 </head>
 <body>
 
 <h2>Ejemplo Shadow DOM</h2>
 
-<div id="login-component"></div>
+<div id="nombre-component">
+    <input id="txtNombre" placeholder="Nombre">
+    <button id="btnValidarNombre">Validar Nombre</button>
+</div>
+<div id="apellido-component"></div>
 
 <script>
+    // Validar nombre
+    document.getElementById("btnValidarNombre").addEventListener("click", () => {
+        alert("Su nombre es: " + document.getElementById("txtNombre").value);
+    });
+
     // Contenedor del Shadow DOM
-    const host = document.getElementById("login-component");
+    const host = document.getElementById("apellido-component");
 
     // Creamos un Shadow DOM tipo OPEN
     const shadow = host.attachShadow({ mode: "open" });
@@ -28,14 +46,13 @@
             }
         </style>
 
-        <input id="txtUsuario" placeholder="Usuario">
-        <button id="btnIngresar">Ingresar</button>
+        <input id="txtApellido" placeholder="Apellido">
+        <button id="btnValidarApellido">Validar Apellido</button>
     `;
 
-    shadow.getElementById("btnIngresar")
+    shadow.getElementById("btnValidarApellido")
         .addEventListener("click", () => {
-            alert("Bienvenido " +
-                shadow.getElementById("txtUsuario").value);
+            alert("Su apellido es " + shadow.getElementById("txtApellido").value);
         });
 </script>
 
